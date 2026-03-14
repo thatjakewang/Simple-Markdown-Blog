@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block robots %}{% endblock %}
+    <title>{% block title %}Jake的生活雜記{% endblock %}</title>
+    <meta name="description" content="{% block description %}從事資料分析與機器學習相關工作，閒暇之餘寫寫部落格，分享生活的任何大小事。{% endblock %}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon/favicon.ico') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="/">Jake的生活雜記</a>
+            </div>
+        </header>
+        
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Jake的生活雜記</p>
+        </footer>
+    </div>
+</body>
+</html>
