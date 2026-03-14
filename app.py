@@ -2,10 +2,8 @@ from flask import Flask, render_template, url_for, jsonify, send_from_directory
 from flask_flatpages import FlatPages
 from datetime import datetime, date
 import os
-from dotenv import load_dotenv
 
-# ========== 載入環境變數與應用程式 ==========
-load_dotenv()
+# ========== 載入應用程式 ==========
 app = Flask(__name__)
 # ========== FlatPages 配置 ==========
 app.config['FLATPAGES_EXTENSION'] = '.md'
