@@ -164,7 +164,9 @@ p {
 }
 
 /* Markdown 內容增強 */
-.entry h2 { margin-top: 50px; }
+.entry h2 { margin-top: 50px; font-size: 28px;}
+.entry h2::before{ content: "\25A0 "; margin-right: 10px;}
+.entry h3 { font-size: 24px;}
 
 .entry blockquote {
     border-left: 4px solid var(--border-color);
@@ -176,7 +178,10 @@ p {
 
 .entry ul, .entry ol {
     margin-bottom: 1.5em;
-    padding-left: 1.5em;
+    padding: 20px 20px 20px 40px;
+    line-height: 1.75;
+    background-color: #f7f7f7;
+    outline:1px solid rgba(210,210,210,0.8);
 }
 
 .entry li {

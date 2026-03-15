@@ -31,7 +31,11 @@ def format_datetime(value, format="%Y-%m-%d"):
 def get_sorted_posts():
     """取得排序後的文章列表"""
     posts = [p for p in pages if 'date' in p.meta]
-    posts.sort(key=lambda item: str(item['date']), reverse=True)
+    try:
+        posts.sort(key=lambda item: item['date'], reverse=True)
+    except Exception as e:
+        print(f"排序錯誤: {e}")
+        pass
     return posts
 
 # === ROUTES ===
@@ -89,7 +93,7 @@ def home():
     return render_template('index.html', posts=recent_posts)
 
 # SINGLE POST PAGE
-@app.route('/blog/<path:path>/')
+@app.route('/<path:path>/')
 def post(path):
     page = pages.get_or_404(path)
     return render_template('post.html', page=page)
