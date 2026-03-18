@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block description %}{{ page.meta.description | default(page.meta.title + " - Jake Wang's Blog") | trim }}{% endblock %}
-{% block title %}{{ page.meta.title }} - Jake Wang{% endblock %}
+{% block title %}{{ page.meta.title }} - Jake的部落格{% endblock %}
 
 {% block content %}
 <article>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="back-link">
-        <a href="{{ url_for('home') }}">← Back to Blog</a>
+        <a href="{{ url_for('home') }}">← 回到首頁</a>
     </div>
 </article>
 {% endblock %}

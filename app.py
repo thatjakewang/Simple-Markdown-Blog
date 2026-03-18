@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, jsonify, send_from_directory
+from flask import Flask, render_template, url_for, jsonify, send_from_directory, Response
 from flask_flatpages import FlatPages
 from datetime import datetime, date
 import os
@@ -27,6 +27,13 @@ def format_datetime(value, format="%Y-%m-%d"):
     except (AttributeError, ValueError):
         return str(value)
 
+# 日期轉字串
+def format_date_str(raw_date):
+    try:
+        return raw_date.strftime('%Y-%m-%d') if raw_date else ''
+    except (AttributeError, ValueError):
+        return str(raw_date) if raw_date else ''
+
 # 文章排序
 def get_sorted_posts():
     """取得排序後的文章列表"""
@@ -47,26 +54,18 @@ def robots():
 @app.route('/sitemap.xml')
 def sitemap():
     """Generate sitemap.xml dynamically"""
-    from flask import Response
-    
     base_url = 'https://jake.tw'
-    
+
     # Static pages
     sitemap_urls = [
         {'loc': base_url + '/', 'priority': '1.0'},
     ]
-    
+
     # Blog posts
     for post in get_sorted_posts():
-        raw_date = post.meta.get('date')
-        try:
-            lastmod = raw_date.strftime('%Y-%m-%d') if raw_date else ''
-        except (AttributeError, ValueError):
-            lastmod = str(raw_date) if raw_date else ''
-        
         sitemap_urls.append({
             'loc': base_url + url_for('post', path=post.path),
-            'lastmod': lastmod,
+            'lastmod': format_date_str(post.meta.get('date')),
             'priority': '0.7'
         })
     
@@ -103,17 +102,11 @@ def post(path):
 def get_posts_json():
     posts_data = []
     for p in get_sorted_posts():
-        raw_date = p.meta.get('date')
-        try:
-            date_str = raw_date.strftime('%Y-%m-%d') if raw_date else ''
-        except (AttributeError, ValueError):
-            date_str = str(raw_date) if raw_date else ''
         posts_data.append({
             'title': p.meta.get('title', ''),
             'url': url_for('post', path=p.path),
-            'date': date_str,
+            'date': format_date_str(p.meta.get('date')),
             'description': p.meta.get('description', ''),
-            'body': p.body if p.body else ''
         })
     return jsonify(posts_data)
 
