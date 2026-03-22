@@ -52,11 +52,16 @@ a:hover {
    ========================================= */
 header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 20px;
     margin-bottom: 50px;
+}
+
+header h1 {
+    width: 100%;
+    margin-bottom: 20px;
 }
 
 .logo a {
