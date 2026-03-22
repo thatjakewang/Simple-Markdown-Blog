@@ -8,6 +8,12 @@
         <h1>{{ page.meta.title }}</h1>
         <div class="post-meta">
             <span>{{ page.meta.date|strftime }}</span>
+            {% if page.meta.category %}
+            <span class="post-category">
+                &nbsp;•&nbsp; 
+                <a href="{{ url_for('category', category_name=page.meta.category) }}">{{ page.meta.category }}</a>
+            </span>
+            {% endif %}
         </div>
     </header>
 

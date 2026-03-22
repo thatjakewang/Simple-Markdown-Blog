@@ -97,18 +97,14 @@ def post(path):
     page = pages.get_or_404(path)
     return render_template('post.html', page=page)
 
-# API: Posts JSON for search modal
-@app.route('/api/posts')
-def get_posts_json():
-    posts_data = []
-    for p in get_sorted_posts():
-        posts_data.append({
-            'title': p.meta.get('title', ''),
-            'url': url_for('post', path=p.path),
-            'date': format_date_str(p.meta.get('date')),
-            'description': p.meta.get('description', ''),
-        })
-    return jsonify(posts_data)
+# Category
+@app.route('/category/<category_name>/')
+def category(category_name):
+    category_posts = [
+        p for p in get_sorted_posts() 
+        if p.meta.get('category') == category_name
+    ]
+    return render_template('category.html', category_name=category_name, posts=category_posts)
 
 #404
 @app.errorhandler(404)

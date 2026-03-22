@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section>
+    <h1>{{ category_name }} 相關文章：</h1>
+    
+    {% for post in posts %}
+    <div class="post-preview">
+        <span class="post-date">{{ post.meta.date|strftime }}</span>
+        <h3><a href="{{ url_for('post', path=post.path) }}">{{ post.meta.title }}</a></h3>
+    </div>
+    {% else %}
+    <div class="post-preview">
+        <p>目前這個分類還沒有文章喔！</p>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}
