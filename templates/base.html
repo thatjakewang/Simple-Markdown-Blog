@@ -6,7 +6,7 @@
     {% block robots %}{% endblock %}
     <title>{% block title %}Jake的部落格{% endblock %}</title>
     <meta name="description" content="{% block description %}從事資料分析與機器學習相關工作，閒暇之餘寫寫部落格，分享生活的任何大小事。{% endblock %}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.1">
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon/favicon.ico') }}">
 </head>
 <body>
