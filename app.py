@@ -14,6 +14,10 @@ app.config['FLATPAGES_MARKDOWN_EXTENSIONS'] = [
 ]
 pages = FlatPages(app)
 
+CATEGORY_SLUGS = {
+    '機器學習': 'machine-learning',
+}
+
 # ========== 自訂函式 ==========
 # 日期格式轉換
 @app.template_filter('strftime')
@@ -44,6 +48,11 @@ def get_sorted_posts():
         print(f"排序錯誤: {e}")
         pass
     return posts
+
+# 名稱轉換
+@app.template_filter('to_slug')
+def category_to_slug(category_name):
+    return CATEGORY_SLUGS.get(category_name, category_name)
 
 # === ROUTES ===
 # robots.txt
@@ -98,12 +107,15 @@ def post(path):
     return render_template('post.html', page=page)
 
 # Category
-@app.route('/category/<category_name>/')
-def category(category_name):
+@app.route('/category/<slug>/')
+def category(slug):
+    category_name = next((zh for zh, en in CATEGORY_SLUGS.items() if en == slug), slug)
+
     category_posts = [
         p for p in get_sorted_posts() 
         if p.meta.get('category') == category_name
     ]
+
     return render_template('category.html', category_name=category_name, posts=category_posts)
 
 #404
