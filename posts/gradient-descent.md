@@ -1,5 +1,5 @@
 ---
-title: 什麼是梯度下降？
+title: 什麼是梯度下降(Gradient Descent)？
 date: 2026-03-25
 category: 機器學習
 description: "梯度下降（Gradient Descent） 是機器學習中用來「優化模型參數」的核心演算法，目標是讓模型的損失函數（Loss Function） 最小化。"
