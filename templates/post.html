@@ -2,6 +2,31 @@
 {% block description %}{{ page.meta.description | default(page.meta.title + " - Jake Wang's Blog") | trim }}{% endblock %}
 {% block title %}{{ page.meta.title }} - Jake的部落格{% endblock %}
 
+{% block schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ page.meta.title | tojson }},
+  "description": {{ (page.meta.description | default(page.meta.title)) | tojson }},
+  "datePublished": {{ page.meta.date | tojson }},
+  "author": {
+    "@type": "Person",
+    "name": "Jake"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Jake的部落格",
+    "url": "https://jaketw.com"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ request.url }}"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <article>
     <header class="post-header">
